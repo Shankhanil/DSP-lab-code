@@ -1,50 +1,15 @@
-commit f039a6b9351646af2303b9c08b417471621e6510
+commit d074f0f1d9e453631c748a8ee215d65378123598
 Author: Shankhanil Ghosh <shankha.rik@gmail.com>
-Date:   Sun Jan 17 12:44:42 2021 +0530
+Date:   Wed Jan 20 23:59:39 2021 +0530
 
-    Added folder structure in README
+    Created folder DSP-viva-code. All DSP viva code is present in this folder
 
-commit 8bfef429de337ea3d33681fbf78d94dfd0dc6632
+commit ede392903f86ef9672bcf81e897242f5f45a041d
 Author: Shankhanil Ghosh <shankha.rik@gmail.com>
-Date:   Sun Jan 17 12:31:19 2021 +0530
+Date:   Sun Jan 17 12:46:52 2021 +0530
 
-    Restructured repository
+    updated README.md
 
-commit 1844d000d5e8b9f7ab7bf2933acc01eba78991f8
-Author: Shankhanil Ghosh <shankha.rik@gmail.com>
-Date:   Sun Jan 17 12:25:42 2021 +0530
-
-    Removed other duplicated codes
-
-commit 05d06625ffacb1b0c40cd9c940aed5ba8d8f5618
-Author: Shankhanil Ghosh <shankha.rik@gmail.com>
-Date:   Sun Jan 17 12:22:33 2021 +0530
-
-    Removed Josephus snippet codes
-
-commit 8aecb7908a9b63a63d5f72c0a384ce1a75016f88
-Author: Shankhanil Ghosh <shankha.rik@gmail.com>
-Date:   Sun Jan 17 12:19:55 2021 +0530
-
-    Removed snipped code for SLL
-
-commit cc3d62c515ec1588cce7b3c2a13caa25a4d8a202
-Author: Shankhanil Ghosh <shankha.rik@gmail.com>
-Date:   Sun Jan 17 12:18:43 2021 +0530
-
-    Added other C files
-
-commit 1e711f6acdc42db053b33d7bbeb889cb88c75378
-Author: Shankhanil Ghosh <shankha.rik@gmail.com>
-Date:   Sun Jan 17 12:17:05 2021 +0530
-
-    Added moodle codes
-
-commit 147a3bbfefad3c6a198cc230f6bdd6e692a9d62e
-Author: Shankhanil Ghosh <shankha.rik@gmail.com>
-Date:   Sun Jan 17 12:16:03 2021 +0530
-
-    Added first set of code. Added README.md
 commit a16fab7443891481d2fbcff5a86f0b08cc8a9318
 Author: Shankhanil Ghosh <shankha.rik@gmail.com>
 Date:   Sun Jan 17 12:45:48 2021 +0530
