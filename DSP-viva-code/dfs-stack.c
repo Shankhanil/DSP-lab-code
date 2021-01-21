@@ -74,15 +74,21 @@ void dfs(){
 	push(0);
 	displayVertex(0);
 	int unvVertex;
+	
+	// while stack is not empty
 	while (!isEmpty()){
+		// peek stack top
 		int tempVindex = stack[top];
-		unvVertex = getAdjUnvVertex(tempVindex);
-//		printf("%c", vList[unvVertex]->label);
 		
+		// get unv adj vertex against temp vertex
+		unvVertex = getAdjUnvVertex(tempVindex);
+		
+		// if no adj vertex
 		if (-1 == unvVertex){
-			pop();
+			pop(); // then pop from stack
 		}
 		else{
+			// else visit vertex and push to stack
 			vList[unvVertex]->isVisited = true;
 			displayVertex(unvVertex);
 			push(unvVertex);
@@ -93,6 +99,25 @@ void dfs(){
 // ****************DRIVER CODE*********************
 int main(){
 //	vertex* nv1, nv2, nv3;
+	// creating new graph
+	newVertex('0');
+	newVertex('1');
+	newVertex('2');
+	newVertex('3');
+	newVertex('4');
+	
+	addEdge('1', '0');
+	addEdge('0', '2');
+	addEdge('1', '2');
+	addEdge('2', '4');
+	addEdge('0', '3');
+	dfs();
+	
+	// resetting the vCount = -1, meaning the graph is empty
+	vCount = -1;
+	printf("\n");
+	
+	// creating new graph
 	newVertex('1');
 	newVertex('2');
 	newVertex('3');
@@ -106,5 +131,6 @@ int main(){
 	addEdge('2', '5');
 	addEdge('5', '6');
 	dfs();
+	
 	return 0;
 }

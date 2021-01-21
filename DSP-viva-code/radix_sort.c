@@ -1,124 +1,269 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-#define MIN -999999
-#define MAX  999999
-
-#define LIMIT 100
-typedef struct node{
-	int data;
-	struct node *next, *prev;
-} Node;
-
-typedef struct dll{
-	Node *head, *tail;
-	int length;
-} dll;
-
-
-Node *newNode(int data){
-	Node *node;
-	node = (Node*)malloc(sizeof(Node));
+int d;
+int count=0;
+int a[100];
+int round1[100];
+int c1;
+// dll node
+struct node
+{
+	int n;
+	struct node *prev, *next;
 	
-	node->data = data;
-	node->next = NULL;
-	node->prev = NULL;
-	return node;
-}
+};
+// head pointer
+struct node *head=NULL;
 
-dll* init(dll *L){
-	L = (dll*) malloc(sizeof(dll));
+// insert fn
+void insert(int p,int d)
+{
 	
-	L->head = newNode(MIN);
-	L->tail = newNode(MAX);
-	L->length = 0;
-	L->head->next = L->tail;
-	L->tail->prev = L->head;
-//	printf("%u", L->head);
-	return L;
-}
-
-bool isPresent(dll *L, Node* n){
-	Node* temp;
-	temp = L->head;
+	struct node* new=(struct node*)malloc(sizeof(struct node));
+	new->n=p;
 	
-	while (temp != L->tail){
-		if (temp == n) return true;
-		temp = temp->next;
+	struct node* temp=(struct node*)malloc(sizeof(struct node));
+	temp=head;	
+	if(NULL == head)
+	{
+		new->prev=NULL;
+		new->next=NULL;
+		head=new;	
 	}
-	return false;
-}
-
-Node* search(dll *L, int data){
-	Node* temp;
-	temp = L->head;
+	else
+	{
+		// inserting in appropriate position in LL
+		int c=((temp->n)%10);
+			if(c>d)
+			{
+				temp->next=temp->next;
+				new->prev=temp->prev;
+				new->next=temp;
+				temp->prev=new;
+				
+				
+				head=new;
+				return;
+				
+			}
+			else{
+				while(c<=d && temp->next!=NULL)
+				{
+					temp=temp->next;
+					
+						c=((temp->n)%10);
+					
+					
+				}
+				if(c>d){
+					new->prev=temp->prev;
+					new->next=temp;
+					temp->prev->next=new;
+					temp->prev=new;
+				}
+				else{
+					new->prev=temp;
+					new->next=temp->next;
+					temp->next=new;
+				}			
+			}
 	
-	while (temp != L->tail){
-		if (temp->data == data) return temp;
-		temp = temp->next;
 	}
-	return NULL;
 }
 
-Node* insert( dll *L, Node* n, int data ){
-	Node *newN = newNode(data);
-	if (!isPresent(L, n)) return NULL;
-	else if( L->length < LIMIT){
-		Node *Nnext;
-		Nnext = n->next;
+void sort()
+{
+	while(count<=5)
+	{
+	struct node* temp=(struct node*)malloc(sizeof(struct node));
+	temp=head;
+	int n1,n2,key;
+	
+	
+	struct node* p1=temp->next;//i
+	
+	struct node*p2=NULL;
+	while(p1!=NULL)
+	{
+		p2=p1->prev;//j
+		key=p1->n;
+		int v=((p1->n)/10);
+		int d=((p2->n)/10);//for else loop
+		if(count==2)
+		{
+				 
+				 n1=(v%10);
+				
+				n2=(d%10);
+				
+		}
+		else
+		{
+		while(c1>2)
+		{
+			
+			
+			
+				n1=(v/10);
+			
+				n2=(d/10);
+				c1--;
+			
+			v=n1;
+			d=n2;
+		}
+		}
 		
-		newN->next = Nnext;
-		newN->prev = n;
+		int key1=n1;
 		
-		Nnext->prev = newN;
-		n->next = newN;
-		L->length++;
-		return newN;
+		
+		while(p2!=NULL && n2>key1)
+		{	c1=count;
+			
+			p2->next->n=p2->n;
+			
+			p2=p2->prev;
+			
+			//c1=count;
+			if(p2!=NULL)
+			{
+				
+			if(count==2)
+			{
+				
+				int d=((p2->n)/10);
+				n2=(d%10);
+				
+				
+			}
+			
+			else
+			{
+				if(p2!=NULL)
+				{
+					int d=((p2->n)/10);
+					while(c1>2){
+			
+					
+						n2=(d/10);
+						d=n2;
+						c1--;
+					}
+					
+				}
+			}
+			}
+			
+		}
+		c1=count;
+		if(p2==NULL)
+			head->n=key;
+			
+		else
+			p2->next->n=key;	
+		
+		
+		p1=p1->next;
 	}
-	else{
-		return NULL;
-	}
-}
-
-void traverse(dll *L){
-	Node *temp = L->head->next;
-	printf("[HEAD]->");
-	while(temp != L->tail){
-		printf("%d ->", temp->data);
-		temp = temp->next;
-	}
-	printf("[TAIL]\n");
-}
-
-Node *getMax(dll *L){
-	Node *temp;
-	temp = L->head->next;
-	Node* max = newNode(MIN);
-	while(temp != L->tail){
-		if (temp->data > max->data) max = temp;
-		temp = temp->next;
-	}
-	return max;
-}
-
-main(){
-	dll *L1, *L2;
-	L2 = init(L2);
-	L1 = init(L1);
-
-	Node *n, *n2;
 	
-	n = insert(L1, L1->head, 2);
-	n = insert(L1, n, 3);
-	n = insert(L1, n, 5);
+	temp=head;
+	//i=1;
+	while(temp!=NULL)
+	{
+		
+		temp=temp->next;
+	}
+	count++;
+	c1=count;
+	}
+}		
 
-	n2 = insert(L2, L2->head, -4);
-	n2 = insert(L2, n2, -8);
-	n2 = insert(L2, n2, -2);
-
-	traverse(L1);
-	traverse(L2);
-
+int main(void)
+{
+	int n,i,k,j,flag=1;
+	int c=0;
+	int f=0;
+	scanf("%d",&n);
+	
+	for(i=1;i<=n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	if(n<=0)
+	{
+		printf("INVALID INPUT\n");
+		return 0;
+	}
+	
+	for(i=1;i<=n-1;i++)
+	{
+		
+			if(a[i]<a[i+1])
+				c++;
+			if(a[i]<0||a[i+1]<0)
+				flag=0;
+		
+	}
+	for(i=1;i<=n-1;i++)
+	{
+		
+			if(a[i]>a[i+1])
+				f++;
+			
+		
+	}
+	if(flag==0)
+	{
+		printf("Invalid Input\n");
+		return 0;
+	}
+	else if(c==n-1||f==n-1)
+	{
+		if(c==n-1){
+		for(i=1;i<=n;i++)
+		{
+			printf("%d ",a[i]);
+		}
+		}
+		else
+		{
+			for(i=n;i>=1;i--)
+		{
+			printf("%d ",a[i]);
+		}
+		}
+		return 0;
+	}
+	else
+	{
+	count=1;
+	
+	for(i=1;i<=n;i++)
+	{
+		insert(a[i],(a[i]%10));
+	}
+	
+	struct node* temp1=(struct node*)malloc(sizeof(struct node));
+	temp1=head;
+	
+	temp1=NULL;
+	count++;
+	c1=count;
+	sort();
+	temp1=head;
+	while(temp1!=NULL)
+	{
+				
+		//round1[i]=temp1->n;
+		printf("%d ",temp1->n);
+		temp1=temp1->next;
+		//i++;
+		
+	}
+	
+	}
 	return 0;
+	
+	
 }
