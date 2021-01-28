@@ -1,0 +1,18 @@
+Total vertices = 5
+
+
+Added undirected edge btn 0 and 1
+Added undirected edge btn 2 and 3
+Added undirected edge btn 3 and 4
+Invalid vertex 6 and 0 skipping...
+
+
+the adj list representation of the graph is as 
+0 [HEAD]->1 ->[TAIL]
+1 [HEAD]->0 ->[TAIL]
+2 [HEAD]->3 ->[TAIL]
+3 [HEAD]->4 ->2 ->[TAIL]
+4 [HEAD]->3 ->[TAIL]
+
+
+Total number of connected components = 2

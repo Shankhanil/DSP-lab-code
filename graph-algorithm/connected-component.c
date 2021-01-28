@@ -17,6 +17,7 @@ typedef struct List{
 	Vertex *head, *tail;
 } List;
 
+FILE *inputFile, *outputFile; // FILE handles for input and output files
 List *adjList[MAX]; // the adjaceny LIST array
 bool isVisited[MAX] = {false}; // a boolean array marking the visit-status of a vertex i
 int vertexCount; // total number of vertices in the graph
@@ -59,19 +60,19 @@ void addUndirectedEdge( int source, int destination){
 // vanilla LL traversal
 void traverse(List *L){
 	Vertex *temp = L->head->next;
-	printf("[HEAD]->");
+	fprintf(outputFile, "[HEAD]->");
 	while(temp != L->tail){
-		printf("%d ->", temp->label);
+		fprintf(outputFile, "%d ->", temp->label);
 		temp = temp->next;
 	}
-	printf("[TAIL]\n");
+	fprintf(outputFile, "[TAIL]\n");
 }
 
 // display entire adj list
 void traverseAdjList(){
 	int i = 0; 
 	for(; i<vertexCount; i++){
-		printf("%d ", i);
+		fprintf(outputFile, "%d ", i);
 		traverse(adjList[i]);
 	}
 }
@@ -109,8 +110,8 @@ void buildGraphFromFile(FILE *f){
 	int v1, v2;
 	
 	fscanf(f, "%d", &vertexCount);
-	printf("Total vertices = %d\n", vertexCount);
-    printf("\n\n");
+	fprintf(outputFile, "Total vertices = %d\n", vertexCount);
+    fprintf(outputFile, "\n\n");
 	initAdjList();
     
 	while(fscanf(f, "%d", &v1) == 1) {
@@ -119,24 +120,24 @@ void buildGraphFromFile(FILE *f){
 					(v1 < 0 || v1 >= vertexCount) || 
 					(v2 < 0 || v2 >= vertexCount)
 				)
-					printf("Invalid vertex %d and %d skipping...\n", v1, v2);
+					fprintf(outputFile, "Invalid vertex %d and %d skipping...\n", v1, v2);
 			else{
         		addUndirectedEdge(v1, v2);
-        		printf("Added undirected edge btn %d and %d\n", v1, v2);
+        		fprintf(outputFile, "Added undirected edge btn %d and %d\n", v1, v2);
 			}
 		}
     }
-    printf("\n\n");
-    printf("the adj list representation of the graph is as \n");
+    fprintf(outputFile, "\n\n");
+    fprintf(outputFile, "the adj list representation of the graph is as \n");
     traverseAdjList();
-    printf("\n\n");
+    fprintf(outputFile, "\n\n");
 }
 
 main(){
-	FILE *inputFIle, *outputFile;
-	inputFIle = fopen("connected-component-input-file.txt", "r");
-	outputFIle = fopen("connected-component-output-file.txt", "w");
+	inputFile = fopen("connected-component-input-file.txt", "r");
+	outputFile = fopen("connected-component-output-file.txt", "w");
 	buildGraphFromFile(inputFile);
-	printf("Total number of connected components = %d\n", numOfConnectedComponents());
-	
+	fprintf(outputFile, "Total number of connected components = %d\n", numOfConnectedComponents());
+	fclose(inputFile);
+	fclose(outputFile);
 }
