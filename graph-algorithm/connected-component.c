@@ -17,10 +17,9 @@ typedef struct List{
 	Vertex *head, *tail;
 } List;
 
-List *adjList[MAX];
-//Vertex* vertexList[MAX];
-//bool isVisited[MAX] = {false};
-int vertexCount; // number of vertices
+List *adjList[MAX]; // the adjaceny LIST array
+bool isVisited[MAX] = {false}; // a boolean array marking the visit-status of a vertex i
+int vertexCount; // total number of vertices in the graph
 
 // ***************ADJ-LIST FUNCTIONS******************************
 // create a new vertex node
@@ -79,57 +78,65 @@ void traverseAdjList(){
 
 // ***************GRAPH FUNCTIONS******************************
 // vanilla DFS util fn on ADJ list
-void DFSUtil(int vertexIndex, int isVisited[]){
-	 isVisited[vertexIndex] = true;
-	 Vertex *temp = adjList[vertexIndex]->head->next;
-	 
-	 while(temp != adjList[vertexIndex]->tail){
-	 	// if temp vertex is not visited
+void DFSUtil(int vertexIndex) {
+	// marking the current vertex as visited
+	isVisited[vertexIndex] = true;
+	Vertex *temp = adjList[vertexIndex]->head->next;
+	
+	while(temp != adjList[vertexIndex]->tail){
 		if ( isVisited[temp->label] == false)
-//			printf("now visiting %d", temp->label);
-			DFSUtil(temp->label, isVisited);
+			DFSUtil(temp->label); // recursive calling DFS-util
 		temp = temp->next;
 	}
 }
 
 // calculate number of connected components
 int numOfConnectedComponents(){
+	
 	int connectedComponentCount = 0;
 	int i = 0;
-	bool isVisited[MAX] = {false};
-//	printf("%d ", isVisited[MAX-10]);
-//	isVisited = (bool*) malloc(vertexCount*sizeOf(bool));
+	
 	for(; i<vertexCount; i++){
 		if (isVisited[i] == false){
-			DFSUtil(i, isVisited);
+			DFSUtil(i);
 			connectedComponentCount++;
 		}
 	}
-	printf("%d", connectedComponentCount);
 	return connectedComponentCount;
 }
 
 void buildGraphFromFile(FILE *f){
+	int v1, v2;
 	
+	fscanf(f, "%d", &vertexCount);
+	printf("Total vertices = %d\n", vertexCount);
+    printf("\n\n");
+	initAdjList();
+    
+	while(fscanf(f, "%d", &v1) == 1) {
+    	if (fscanf(f, "%d", &v2) == 1){
+    		if (
+					(v1 < 0 || v1 >= vertexCount) || 
+					(v2 < 0 || v2 >= vertexCount)
+				)
+					printf("Invalid vertex %d and %d skipping...\n", v1, v2);
+			else{
+        		addUndirectedEdge(v1, v2);
+        		printf("Added undirected edge btn %d and %d\n", v1, v2);
+			}
+		}
+    }
+    printf("\n\n");
+    printf("the adj list representation of the graph is as \n");
+    traverseAdjList();
+    printf("\n\n");
 }
 
 main(){
-	vertexCount = 10;
-	//initVertexList();
-	initAdjList();
+	FILE *inputFIle, *outputFile;
+	inputFIle = fopen("connected-component-input-file.txt", "r");
+	outputFIle = fopen("connected-component-output-file.txt", "w");
+	buildGraphFromFile(inputFile);
+	printf("Total number of connected components = %d\n", numOfConnectedComponents());
 	
-	// add edges
-	addUndirectedEdge(1, 0);
-    addUndirectedEdge(2, 3);
-    addUndirectedEdge(3, 4);
-//	addUndirectedEdge(0,1);
-//	addUndirectedEdge(0,2);
-//	addUndirectedEdge(0,3);
-//	addUndirectedEdge(0,4);
-//	
-	// show the adj list
-	traverseAdjList();
-	
-	// calculate the #of Connected components
-	numOfConnectedComponents();
 }

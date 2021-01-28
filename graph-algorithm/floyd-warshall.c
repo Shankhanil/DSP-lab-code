@@ -43,10 +43,10 @@ void floydWarshall ()
 				if (dist[i][k] + dist[k][j] < dist[i][j]) 
 					dist[i][j] = dist[i][k] + dist[k][j]; 
 			}
-			fprintf(f,"************K = %d \t I = %d************\n", k, i);
-			printSolution();
-			fprintf(f,"******************************************\n", k, i);
 		} 
+		fprintf(f,"************K = %d************\n", k);
+		printSolution();
+		fprintf(f,"******************************\n");
 	} 
 } 
 
