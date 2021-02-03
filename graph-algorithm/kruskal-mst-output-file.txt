@@ -1,0 +1,17 @@
+Total vertices = 9
+
+
+Added undirected edge btn 7 and 6, weight = 1
+Added undirected edge btn 8 and 2, weight = 2
+Added undirected edge btn 6 and 5, weight = 2
+Added undirected edge btn 0 and 1, weight = 4
+Added undirected edge btn 2 and 5, weight = 4
+Added undirected edge btn 8 and 6, weight = 6
+Added undirected edge btn 2 and 3, weight = 7
+Added undirected edge btn 7 and 8, weight = 7
+Added undirected edge btn 0 and 7, weight = 8
+Added undirected edge btn 1 and 2, weight = 8
+Added undirected edge btn 3 and 4, weight = 9
+Added undirected edge btn 5 and 4, weight = 10
+Added undirected edge btn 1 and 7, weight = 11
+Added undirected edge btn 3 and 5, weight = 14
