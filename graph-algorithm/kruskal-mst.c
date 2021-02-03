@@ -18,6 +18,7 @@ edgeList spanList;
 
 FILE *inputFile, *outputFile;
 
+//*************FUNCTION SIGNATURES**************
 void buildGraphFromFile(FILE *f);
 void addUndirectedEdge();
 void kruskalAlgo();	// implementation of kruskal algo
@@ -25,7 +26,9 @@ int  find(int belongs[], int vertexno);	// find operation
 void applyUnion(int belongs[], int c1, int c2); // union operation
 void sort(); // refactored O(n^2) sort algo, to sort the elist based on their weights
 void print(); // print result
+//**********************************************
 
+//*************FUNCTION DESCRIPTION**************
 void addUndirectedEdge( int src, int dest, int weight){
 	elist.data[elist.n].src = src;
 	elist.data[elist.n].dest = dest;
@@ -57,12 +60,6 @@ void buildGraphFromFile(FILE *f){
 	}
 }
 
-
-// void printBelongs(int belongs[]){
-	// for (i = 0; i < vertexCount; i++)
-		// printf("%d ", belongs[i]);
-// }
-
 void kruskalAlgo() {
 	int belongs[MAX], i, j, cno1, cno2;
 
@@ -79,11 +76,10 @@ void kruskalAlgo() {
 
 	// building the mst
 	for (i = 0; i < elist.n; i++) {
-		// checking if src and dest vertex of i-th edge belongs to 
-		// i-th set or not
+		
 		cno1 = find(belongs, elist.data[i].src);
 		cno2 = find(belongs, elist.data[i].dest);
-		// printBelongs(belongs);
+		
 		// if on including the edge btn src and dest
 		// NOT cause cycle...
 		if (cno1 != cno2) {
@@ -122,77 +118,24 @@ void sort() {
 
 // Printing the result
 void print() {
-  int i, cost = 0;
-
-  for (i = 0; i < spanList.n; i++) {
-    printf("\n%d - %d : %d", spanList.data[i].src, spanList.data[i].dest, spanList.data[i].weight);
-    cost = cost + spanList.data[i].weight;
-  }
-
-  printf("\nSpanning tree cost: %d", cost);
+	int i, cost = 0;
+	fprintf(outputFile, "\n\n------------MST SOLUTION---------------");
+	for (i = 0; i < spanList.n; i++) {
+		fprintf(outputFile, "\n%d - %d : %d", spanList.data[i].src, spanList.data[i].dest, spanList.data[i].weight);
+		cost = cost + spanList.data[i].weight;
+	}
+	fprintf(outputFile, "\n\n------------MST COST---------------");
+	fprintf(outputFile, "\nSpanning tree cost: %d", cost);
 }
 
+//***************DRIVER CODE*****************************
 int main() {
 	int i, j, total_cost;
+	printf("Input read from: ./kruskal-mst-input-file.txt\n");
 	inputFile = fopen("kruskal-mst-input-file.txt", "r");
 	outputFile = fopen("kruskal-mst-output-file.txt", "w");
 	buildGraphFromFile(inputFile);
-	// Graph[0][0] = 0;
-	// Graph[0][1] = 4;
-  	// Graph[1][2] = 4;
 	kruskalAlgo();
 	print();
+	printf("Output written to: ./kruskal-mst-output-file.txt");
 }
-  // n = 6;
-
-  // Graph[0][0] = 0;
-  // Graph[0][1] = 4;
-  // Graph[0][2] = 4;
-  // Graph[0][3] = 0;
-  // Graph[0][4] = 0;
-  // Graph[0][5] = 0;
-  // Graph[0][6] = 0;
-
-  // Graph[1][0] = 4;
-  // Graph[1][1] = 0;
-  // Graph[1][2] = 2;
-  // Graph[1][3] = 0;
-  // Graph[1][4] = 0;
-  // Graph[1][5] = 0;
-  // Graph[1][6] = 0;
-
-  // Graph[2][0] = 4;
-  // Graph[2][1] = 2;
-  // Graph[2][2] = 0;
-  // Graph[2][3] = 3;
-  // Graph[2][4] = 4;
-  // Graph[2][5] = 0;
-  // Graph[2][6] = 0;
-
-  // Graph[3][0] = 0;
-  // Graph[3][1] = 0;
-  // Graph[3][2] = 3;
-  // Graph[3][3] = 0;
-  // Graph[3][4] = 3;
-  // Graph[3][5] = 0;
-  // Graph[3][6] = 0;
-
-  // Graph[4][0] = 0;
-  // Graph[4][1] = 0;
-  // Graph[4][2] = 4;
-  // Graph[4][3] = 3;
-  // Graph[4][4] = 0;
-  // Graph[4][5] = 0;
-  // Graph[4][6] = 0;
-
-  // Graph[5][0] = 0;
-  // Graph[5][1] = 0;
-  // Graph[5][2] = 2;
-  // Graph[5][3] = 0;
-  // Graph[5][4] = 3;
-  // Graph[5][5] = 0;
-  // Graph[5][6] = 0;
-
-//  kruskalAlgo();
-//  print();
-//}
